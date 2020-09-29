@@ -1,31 +1,45 @@
-const css = document.querySelector("h3");
+const css = document.querySelector(".value");
 const color1 = document.querySelector(".color1");
 const color2 = document.querySelector(".color2");
 const body = document.getElementById("gradient");
 const button = document.querySelector("button");
 
-window.onload = setGradient;
-
-function setGradient() {
+const setGradient = () => {
   body.style.background =
     "linear-gradient(to right, " + color1.value + "," + color2.value + ")";
+  css.value = body.style.background + ";";
+};
 
-  css.textContent = body.style.background + ";";
-}
-
-function randomRGB() {
+const randomRGB = () => {
   let rgbValues = [];
   for (let i = 0; i < 3; i++) {
     rgbValues.push(Math.floor(Math.random() * 256));
   }
   return `rgb(${rgbValues[0]},${rgbValues[1]},${rgbValues[2]})`;
-}
+};
 
-function setRandom() {
+const setRandom = () => {
   body.style.background =
     "linear-gradient(to right, " + randomRGB() + ", " + randomRGB() + ")";
-  css.textContent = body.style.background + ";";
-}
+  css.value = body.style.background + ";";
+};
+
+const copyField = () => {
+  var copyText = document.getElementById("copyField");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = copyText.value;
+};
+
+const outFunc = () => {
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Copy to clipboard";
+};
+
+window.onload = setGradient;
 
 color1.addEventListener("input", setGradient);
 
